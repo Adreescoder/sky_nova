@@ -23,6 +23,65 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+      endDrawer: Drawer(
+          child: ListView(children: [
+        DrawerHeader(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.purple, Colors.black],
+            ),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: NetworkImage(
+                    "https://upload.wikimedia.org/wikipedia/commons/5/5f/Alberto_conversi_profile_pic.jpg",
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Muhammad Adrees Nazir",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "m.adrees@example.com",
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.person),
+          title: Text("Profile"),
+          onTap: () {
+            // Add navigation to Profile screen
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text("Settings"),
+          onTap: () {
+            // Add navigation to Settings screen
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text("Logout"),
+          onTap: () {
+            // Add logout functionality
+          },
+        ),
+      ])),
       body: TabBarView(
         children: [
           Text("OK"),
