@@ -55,7 +55,7 @@ class LoginLogic extends GetxController {
         );
 
         // Navigate to the HomePage after successful login
-        Get.to(() => HomeScreenPage());
+        Get.to(() => HomeScreen());
       }
     } on FirebaseAuthException catch (e) {
       // Handle FirebaseAuth errors

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sky_nova/screens/home/view.dart';
 
+import '../screens/home/view.dart';
 import '../screens/sigup/view.dart';
 
 class RootScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class RootScreen extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasData) {
-          return HomeScreenPage();
+          return HomeScreen();
         } else {
           return SigupPage(); // User is not logged in
         }

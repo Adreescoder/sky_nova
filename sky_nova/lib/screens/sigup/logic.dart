@@ -89,7 +89,7 @@ class SignupLogic extends GetxController {
         );
 
         // Navigate to HomePage after successful signup
-        Get.to(() => HomeScreenPage());
+        Get.to(() => HomeScreen());
       }
     } on FirebaseAuthException catch (e) {
       // Handle FirebaseAuth errors
