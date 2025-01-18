@@ -38,10 +38,7 @@ dependencies:
   firebase_core:
   cloud_firestore:
   firebase_auth:
-  shared_preferences:
-  url_launcher:
   flutter_animate:
-  telegram_client:
 
 dev_dependencies:
   flutter_test:
