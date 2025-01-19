@@ -18,6 +18,8 @@ dependencies:
   flutter_animate:
   intl:
   firebase_storage:
+  image_picker_web:
+  image_picker:
 
 flutter:
   assets:
