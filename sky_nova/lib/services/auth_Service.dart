@@ -17,7 +17,7 @@ class RootScreen extends StatelessWidget {
         } else if (snapshot.hasData) {
           return HomeScreen();
         } else {
-          return SigupPage(); // User is not logged in
+          return SignupScreen(); // User is not logged in
         }
       },
     );

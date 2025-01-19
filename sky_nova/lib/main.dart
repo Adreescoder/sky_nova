@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sky_nova/screens/home/view.dart';
+import 'package:sky_nova/screens/sigup/view.dart';
 
 import 'firebase_options.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Sky Nova',
       home: DefaultTabController(
         length: 3, // Number of tabs
-        child: HomeScreen(),
+        child: SignupScreen(),
       ),
     );
   }
