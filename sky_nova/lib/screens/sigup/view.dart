@@ -1,11 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:image_picker_web/image_picker_web.dart';
 import 'package:sky_nova/screens/login/view.dart';
 
 import 'logic.dart';
@@ -195,28 +193,23 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _handleImageUpload() async {
     try {
-      final ImagePicker _picker = ImagePicker();
-      XFile? image;
+      Uint8List? image;
 
       if (kIsWeb) {
-        // For web, use image_picker_web
-        image = await _picker.pickImage(source: ImageSource.gallery);
-      } else if (Platform.isAndroid || Platform.isIOS) {
-        // For mobile (Android/iOS), use image_picker
-        image = await _picker.pickImage(source: ImageSource.gallery);
+        image = await ImagePickerWeb.getImageAsBytes();
+      } else {
+        // Add mobile-specific image picker logic here
       }
 
       if (image != null) {
-        // If an image is picked, convert it to bytes and update the profile image
-        final imageBytes = await image.readAsBytes();
         setState(() {
-          logic.profileImage = imageBytes;
+          logic.profileImage = image;
         });
       } else {
         Get.snackbar("Error", "No image selected.");
       }
     } catch (e) {
-      Get.snackbar("Error", "Image picker failed: $e");
+      Get.snackbar("Error", "Failed to pick image: $e");
     }
   }
 
