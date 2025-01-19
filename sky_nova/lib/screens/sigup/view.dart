@@ -1,9 +1,19 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sky_nova/screens/login/view.dart';
 
 import 'logic.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
   final SignupLogic logic = Get.put(SignupLogic());
 
   @override
@@ -21,17 +31,33 @@ class SignupScreen extends StatelessWidget {
               child: Obx(() {
                 return Column(
                   children: [
-                    // Profile Image Picker
                     GestureDetector(
-                      onTap: () => logic.pickImage(),
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: logic.profileImage != null
-                            ? MemoryImage(logic.profileImage!)
-                            : null,
-                        child: logic.profileImage == null
-                            ? const Icon(Icons.add_a_photo, size: 30)
-                            : null,
+                      onTap: () async {
+                        try {
+                          if (kIsWeb) {
+                            // Update UI after image selection
+                          } else if (Platform.isAndroid || Platform.isIOS) {
+                            Get.snackbar(
+                                "Error", "Please Upload Image on Mobile");
+                          }
+                        } catch (e) {
+                          Get.snackbar("Error", "Image picker failed: $e");
+                        }
+                      },
+                      child: Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          shape: BoxShape
+                              .circle, // Use BoxShape.circle for better circle
+                          border: Border.all(color: Colors.black),
+                        ),
+                        child: logic.profileImage != null
+                            ? ClipOval(
+                                // ClipOval to ensure circular image
+                                child: Image.memory(logic.profileImage!),
+                              )
+                            : const Icon(CupertinoIcons.camera),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -41,7 +67,7 @@ class SignupScreen extends StatelessWidget {
                       decoration: const InputDecoration(
                         labelText: "Name",
                         border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.person),
+                        prefixIcon: Icon(CupertinoIcons.person),
                       ),
                       validator: (value) => value == null || value.isEmpty
                           ? "Enter your name"
@@ -54,7 +80,7 @@ class SignupScreen extends StatelessWidget {
                       decoration: const InputDecoration(
                         labelText: "Email",
                         border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.email),
+                        prefixIcon: Icon(CupertinoIcons.g),
                       ),
                       validator: (value) => value != null &&
                               !RegExp(r"^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+")
@@ -86,7 +112,7 @@ class SignupScreen extends StatelessWidget {
                           ),
                     const SizedBox(height: 20),
                     TextButton(
-                      onPressed: () => Get.toNamed('/login'),
+                      onPressed: () => Get.to(() => LoginPage()),
                       child: const Text("Already have an account? Log In"),
                     ),
                   ],
