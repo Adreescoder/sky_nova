@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:image_picker_web/image_picker_web.dart';
 import 'package:sky_nova/screens/login/view.dart';
 
 import 'logic.dart';
@@ -87,30 +85,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
   List<Widget> _buildFormContent(bool isSmallScreen) {
     return [
-      GestureDetector(
-        onTap: _handleImageUpload,
-        child: Container(
-          height: 150,
-          width: 150,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: Colors.black),
-          ),
-          child: logic.profileImage != null
-              ? ClipOval(
-                  child: Image.memory(
-                    logic.profileImage!,
-                    fit: BoxFit.cover,
-                  ),
-                )
-              : Icon(
-                  Icons.camera_alt,
-                  size: 50,
-                  color: Colors.grey,
-                ),
-        ),
-      ),
-      const SizedBox(height: 20),
       _buildTextField(
         controller: logic.userNameController,
         label: "Name",
@@ -191,27 +165,7 @@ class _SignupScreenState extends State<SignupScreen> {
     ];
   }
 
-  void _handleImageUpload() async {
-    try {
-      Uint8List? image;
-
-      if (kIsWeb) {
-        image = await ImagePickerWeb.getImageAsBytes();
-      } else {
-        // Add mobile-specific image picker logic here
-      }
-
-      if (image != null) {
-        setState(() {
-          logic.profileImage = image;
-        });
-      } else {
-        Get.snackbar("Error", "No image selected.");
-      }
-    } catch (e) {
-      Get.snackbar("Error", "Failed to pick image: $e");
-    }
-  }
+  void _handleImageUpload() async {}
 
   Widget _buildTextField({
     required TextEditingController controller,
